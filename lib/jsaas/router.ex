@@ -4,7 +4,7 @@ defmodule JSaaS.Router do
   plug :match
   plug :dispatch
 
-  @spec getTweet(String.t, String.t :: String.t) :: String.t
+  @spec getTweet(String.t, (String.t -> String.t)) :: String.t
   defp getTweet(account_name, transformation) do
     options = [screen_name: account_name,
     count: 200,
