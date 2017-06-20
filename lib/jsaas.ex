@@ -6,7 +6,7 @@ defmodule JSaaS.Application do
     require Logger
     require ExTwitter
 
-    port = Application.get_env(:jsaas, :cowboy_port, "8080") |> String.to_integer
+    port = Application.get_env(:jsaas, :cowboy_port) |> String.to_integer
 
     oauth = Application.get_env(:extwitter, :oauth, nil)
     ExTwitter.configure(oauth)
