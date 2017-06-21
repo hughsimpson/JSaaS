@@ -3,7 +3,11 @@ defmodule JSaaS.Tweet do
   @derive [Poison.Encoder]
   defstruct text: nil
 
-  @spec to_single_tweet([%Elixir.ExTwitter.Model.Tweet{text: String.t}, ...], (String.t -> String.t)) :: String.t
+  @doc ~S"""
+      iex> JSaaS.Tweet.to_single_tweet([%ExTwitter.Model.Tweet{text: "foo"}], &String.reverse/1)
+      "{\"text\":\"oof\"}"
+  """
+  @spec to_single_tweet([%ExTwitter.Model.Tweet{}, ...], (String.t -> String.t)) :: String.t
   def to_single_tweet(tweetsResponse, transformation) when is_list(tweetsResponse) do
     tweetsResponse
     |> Enum.map(&(&1.text))
@@ -14,7 +18,11 @@ defmodule JSaaS.Tweet do
     |> Poison.encode!
   end
 
-  @spec init_from_message(String.t) :: %Elixir.JSaaS.Tweet{text: String.t}
+  @doc ~S"""
+      iex> JSaaS.Tweet.init_from_message("ok!")
+      %JSaaS.Tweet{text: "ok!"}
+  """
+  @spec init_from_message(String.t) :: %JSaaS.Tweet{}
   def init_from_message(tweetMessage) do
     %JSaaS.Tweet{text: tweetMessage}
   end

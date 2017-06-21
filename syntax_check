@@ -1,0 +1,5 @@
+#!/bin/bash
+if [[ `mix dialyzer | tail -1 | grep -oE 'd.+\)'` == "done (passed successfully)" ]]
+  then echo 'cool'
+  else echo 'nope'
+fi
